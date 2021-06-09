@@ -24,7 +24,7 @@ export default function Card(props) {
   return (
     <Router>
       <div className='imgWrapper'>
-        <Link to='/card/:id'>
+        <Link to='/card'>
           <img
             className='imgCard'
             id={props.id}

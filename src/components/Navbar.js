@@ -16,7 +16,7 @@ export default function Navbar(props) {
 
   return (
     <Router>
-      <div className='navbarContainer'>
+      <nav className='navbarContainer'>
         <Link to='/'>
           <p>Logo</p>
         </Link>
@@ -32,7 +32,7 @@ export default function Navbar(props) {
           <p>Pins</p>
         </Link>
         <button>Sign In</button>
-      </div>
+      </nav>
     </Router>
   );
 }
