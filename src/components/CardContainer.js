@@ -1,17 +1,17 @@
 import React from 'react';
-import Card from './Card';
 import Loading from './Loading';
-import Error from './Error';
 import Search from './Search';
+import Error from './Error';
+import Card from './Card';
 
 export default function CardContainer(props) {
   const results = props.results;
   return (
     <>
       <Search queries={results.length} />
-      <main>
-        {results.slice(0, props.count).map((objID) => {
-          return <Card id={objID} />;
+      <main className='imgContainer'>
+        {results.slice(0, props.count).filter(objId => objId != 16580).map((objID) => {
+          return <Card id={objID} className='imgCard'/>;
         })}
       </main>
       {props.noneToLoad && <Error />}

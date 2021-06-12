@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import 'material-design-icons/iconfont/material-icons.css';
 
 export default function Navbar(props) {
   const [search, setSearch] = useState('');
+  let history = useHistory();
 
   function handleChange(e) {
     setSearch(e.target.value);
@@ -12,27 +14,26 @@ export default function Navbar(props) {
     e.preventDefault();
     props.submitSearch(search);
     setSearch('');
+    history.push('/');
   }
 
   return (
-    <Router>
-      <nav className='navbarContainer'>
-        <Link to='/'>
-          <p>Logo</p>
-        </Link>
-        <form onSubmit={handleSubmit}>
-          <input
-            type='text'
-            onChange={handleChange}
-            value={search}
-            className='search'
-          />
-        </form>
-        <Link to='/pins'>
-          <p>Pins</p>
-        </Link>
-        <button>Sign In</button>
-      </nav>
-    </Router>
+    <nav className='navbarContainer'>
+      <Link to='/'>
+        <p className='logo'><span className='material-icons'>crop_portrait</span>Painterest</p>
+      </Link>
+      <form onSubmit={handleSubmit}>
+        <input
+          type='text'
+          onChange={handleChange}
+          value={search}
+          className='search'
+        />
+      </form>
+      <Link to='/pins'>
+        <span className='material-icons'>favorite</span>
+      </Link>
+      <button>Sign In</button>
+    </nav>
   );
 }

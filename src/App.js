@@ -1,9 +1,13 @@
+// import React library
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+// import components
 import Navbar from './components/Navbar';
 import CardContainer from './components/CardContainer';
 import CardPage from './components/CardPage';
+// import packages
 import axios from 'axios';
+// import styling
 import './style.css';
 
 const App = () => {
@@ -25,12 +29,13 @@ const App = () => {
       })
       .then((res) => {
         // console.log(res);
+        console.log('new query');
         setResults([...res.data.objectIDs]);
         setCount(15);
         setNoneToLoad(false);
         setLoading(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }, [query]);
 
   function handleClick() {
@@ -56,9 +61,7 @@ const App = () => {
           />
         </Route>
 
-        <Route exact path='/card'>
-          <h1>Hello world</h1>
-        </Route>
+        <Route path='/card/:id' component={CardPage} />
 
       </Switch>
     </Router>
