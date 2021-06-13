@@ -17,7 +17,6 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
 firebase.initializeApp({
   apiKey: 'AIzaSyAAcguM2aC6wvj2tZ_t0Hmfiqx6FV6alwo',
   authDomain: 'painterest-9e46f.firebaseapp.com',
@@ -27,9 +26,6 @@ firebase.initializeApp({
   appId: '1:811556305483:web:8e47f68b96a52b120d2bce',
   measurementId: 'G-VJSCHJBX58',
 });
-
-// const firestore = firebase.firestore();
-// const auth = firebase.auth();
 
 const App = () => {
   const [query, setQuery] = useState('');
@@ -83,7 +79,6 @@ const App = () => {
         </Route>
         <Route path='/card/:id' component={CardPage} />
         <Route path='/pins' component={Pins} />
-
       </Switch>
     </Router>
   );

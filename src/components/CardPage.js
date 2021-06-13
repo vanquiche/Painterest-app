@@ -19,6 +19,7 @@ export default function CardPage({ match }) {
   const [artist, setArtist] = useState('');
   const [loading, setLoading] = useState(true);
   const [viewMore, setViewMore] = useState(false);
+  const [pinIcon, setPinIcon] = useState('favorite_border');
 
   useEffect(() => {
     setLoading(true);
@@ -78,27 +79,34 @@ export default function CardPage({ match }) {
     firestore
       .collection('myPins')
       .add({
-        objID: id
+        objID: id,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .catch((err) => console.error('error adding document', err));
+    setPinIcon('favorite');
   }
+
+  // TODOS:
+  // zoom function
+  // info function
 
   return (
     <div>
       <div className='imgLargeFrame'>
         {loading && <Loading />}
         <img className='imgLarge' src={src} alt={title} />
-        <ControlBtns onClick={pinImage} />
+        <ControlBtns onClick={pinImage} innerContent={pinIcon}/>
       </div>
-      <h3 style={{ textAlign: 'center' }}>
+
+      {loading === false && <h3 style={{ textAlign: 'center' }}>
         {title} by {artist}
-      </h3>
+      </h3>}
 
       <p>{query.length}</p>
 
       <div className='imgContainer'>{viewMore && displayMore()}</div>
 
-      <button onClick={handleClick}>similar images</button>
+      <button className='loadBtn' onClick={handleClick}>similar images</button>
     </div>
   );
 }

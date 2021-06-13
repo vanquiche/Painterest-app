@@ -1,8 +1,10 @@
-import React from 'react'
+import React from 'react';
+import 'material-design-icons/iconfont/material-icons.css';
 
 export default function Loading() {
   return (
-      <h3>Loading...</h3>
-
-  )
+    <div>
+      <span className='material-icons loading'>crop_portrait</span>
+    </div>
+  );
 }

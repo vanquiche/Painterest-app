@@ -8,7 +8,7 @@ export default function ControlBtns(props) {
         <span className='material-icons'>pageview</span>
       </li>
       <li onClick={props.onClick}>
-        <span className='material-icons'>favorite</span>
+        <span className='material-icons'>{props.innerContent}</span>
       </li>
       <li>
         <span className='material-icons'>info</span>

@@ -3,6 +3,7 @@
   box-sizing: border-box;
 }
 
+
 body {
   margin-top: 50px;
 }
@@ -43,6 +44,10 @@ input {
   list-style: none;
 }
 
+.imgWrapper {
+  position: relative;
+}
+
 .imgContainer {
   display: flex;
   flex-wrap: wrap;
@@ -61,6 +66,7 @@ input {
   border-radius: 15px;
   margin: 3px 6px 3px 6px;
   align-self: flex-start;
+  background-color: lightgrey;
 }
 
 .imgCardSmall {
@@ -73,10 +79,10 @@ input {
 
 .imgLargeFrame {
   display: flex;
+  position: relative;
   margin: auto;
   margin-top: 75px;
   margin-bottom: 15px;
-  position: relative;
   /* background-color: tomato; */
   justify-content: center;
   width: auto;
@@ -109,4 +115,20 @@ input {
 .logo {
   /* font-family: Pacifico; */
   font-size: 1.2rem;
+}
+
+.loading {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  animation-name: spin;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+  0% {transform: rotate(0deg)}
+  100% {transform: rotate(360deg)}
 }
