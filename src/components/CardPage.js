@@ -5,7 +5,12 @@ import Card from './Card';
 
 import axios from 'axios';
 
+// firebase imports
+import firebase from 'firebase/app';
+
 export default function CardPage({ match }) {
+  const firestore = firebase.firestore();
+
   const id = match.params.id;
   const [query, setQuery] = useState([]);
   const [count, setCount] = useState(15);
@@ -69,12 +74,21 @@ export default function CardPage({ match }) {
     });
   }
 
+  function pinImage() {
+    firestore
+      .collection('myPins')
+      .add({
+        objID: id
+      })
+      .catch((err) => console.error('error adding document', err));
+  }
+
   return (
     <div>
       <div className='imgLargeFrame'>
         {loading && <Loading />}
-        <img class='imgLarge' src={src} alt={title} />
-        <ControlBtns />
+        <img className='imgLarge' src={src} alt={title} />
+        <ControlBtns onClick={pinImage} />
       </div>
       <h3 style={{ textAlign: 'center' }}>
         {title} by {artist}

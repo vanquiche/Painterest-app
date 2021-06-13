@@ -5,10 +5,31 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import CardContainer from './components/CardContainer';
 import CardPage from './components/CardPage';
+import Pins from './components/Pins'
 // import packages
 import axios from 'axios';
 // import styling
 import './style.css';
+
+// import firebase
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+firebase.initializeApp({
+  apiKey: 'AIzaSyAAcguM2aC6wvj2tZ_t0Hmfiqx6FV6alwo',
+  authDomain: 'painterest-9e46f.firebaseapp.com',
+  projectId: 'painterest-9e46f',
+  storageBucket: 'painterest-9e46f.appspot.com',
+  messagingSenderId: '811556305483',
+  appId: '1:811556305483:web:8e47f68b96a52b120d2bce',
+  measurementId: 'G-VJSCHJBX58',
+});
+
+// const firestore = firebase.firestore();
+// const auth = firebase.auth();
 
 const App = () => {
   const [query, setQuery] = useState('');
@@ -38,7 +59,7 @@ const App = () => {
       .catch((error) => console.error(error));
   }, [query]);
 
-  function handleClick() {
+  function loadMore() {
     let increment = 15;
     if (count >= results.length - 1) {
       setNoneToLoad(true);
@@ -57,11 +78,11 @@ const App = () => {
             count={count}
             noneToLoad={noneToLoad}
             loading={loading}
-            onClick={handleClick}
+            onClick={loadMore}
           />
         </Route>
-
         <Route path='/card/:id' component={CardPage} />
+        <Route path='/pins' component={Pins} />
 
       </Switch>
     </Router>
