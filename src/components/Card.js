@@ -11,17 +11,22 @@ export default function Card(props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let cancel;
     axios
       .get(
-        `https://collectionapi.metmuseum.org/public/collection/v1/objects/${props.id}`
+        `https://collectionapi.metmuseum.org/public/collection/v1/objects/${props.id}`,
+        { cancelToken: new axios.CancelToken((c) => (cancel = c)) }
       )
       .then((res) => {
         // console.log(res);
         setSrc(res.data.primaryImageSmall);
         setTitle(res.data.title);
-        setLoading(false)
+        setLoading(false);
       })
       .catch((error) => console.log(error));
+
+      return () => cancel();
+      
   }, [props.id]);
 
   return (

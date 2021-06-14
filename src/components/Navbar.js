@@ -39,7 +39,7 @@ export default function Navbar(props) {
   }
 
   // console.log(auth.currentUser.displayName)
-  
+
   return (
     <nav className='navbarContainer'>
       <Link to='/'>
@@ -53,6 +53,7 @@ export default function Navbar(props) {
           onChange={handleChange}
           value={search}
           className='search'
+          placeholder='search...'
         />
       </form>
       <Link to='/pins'>

@@ -6,6 +6,7 @@
 
 body {
   margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 a {
@@ -44,10 +45,6 @@ input {
   list-style: none;
 }
 
-.imgWrapper {
-  position: relative;
-}
-
 .imgContainer {
   display: flex;
   flex-wrap: wrap;
@@ -77,6 +74,10 @@ input {
   margin: 5px;
 }
 
+.imgWrapper {
+  position: relative;
+}
+
 .imgLargeFrame {
   display: flex;
   position: relative;
@@ -92,6 +93,7 @@ input {
   max-width: 800px;
   min-width: 400px;
   height: auto;
+  border-radius: 20px;
 }
 
 .controlBtnsWrapper {
@@ -131,4 +133,23 @@ input {
 @keyframes spin {
   0% {transform: rotate(0deg)}
   100% {transform: rotate(360deg)}
+}
+
+.btn {
+  /* display: block; */
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+  margin: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.titleWrapper {
+  text-align: center;
+}
+
+.title {
+  font-style: italic;
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ControlBtns from './ControlBtns';
 import Loading from './Loading';
 import Card from './Card';
+import Title from './Title';
 
 import axios from 'axios';
 
@@ -10,8 +11,8 @@ import firebase from 'firebase/app';
 
 export default function CardPage({ match }) {
   const firestore = firebase.firestore();
-
   const id = match.params.id;
+
   const [query, setQuery] = useState([]);
   const [count, setCount] = useState(15);
   const [src, setSrc] = useState('');
@@ -19,13 +20,15 @@ export default function CardPage({ match }) {
   const [artist, setArtist] = useState('');
   const [loading, setLoading] = useState(true);
   const [viewMore, setViewMore] = useState(false);
-  const [pinIcon, setPinIcon] = useState('favorite_border');
+  const [imageHasPin, setImageHasPin] = useState(false);
 
   useEffect(() => {
+    let cancel;
     setLoading(true);
     axios
       .get(
-        `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`
+        `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`,
+        { cancelToken: new axios.CancelToken((c) => (cancel = c)) }
       )
       .then((res) => {
         setSrc(res.data.primaryImage);
@@ -43,6 +46,26 @@ export default function CardPage({ match }) {
         setLoading(false);
       })
       .catch((error) => console.error(error));
+
+    return () => cancel();
+  }, [id]);
+
+  // checking whether image has been liked and added to DB
+  useEffect(() => {
+    firestore
+      .collection('myPins')
+      .where('objID', '==', id)
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          if (doc) {
+            // console.log('match');
+            // image is alread saved in DB
+            setImageHasPin(true);
+          }
+        });
+      })
+      .catch((err) => console.error(err));
   }, [id]);
 
   function handleClick() {
@@ -67,7 +90,7 @@ export default function CardPage({ match }) {
     } else setCount((prev) => prev + 15);
   }
 
-  function displayMore() {
+  function displaySimilarImgs() {
     // console.log('render');
     // console.log(count);
     return query.slice(0, count).map((objID) => {
@@ -76,14 +99,21 @@ export default function CardPage({ match }) {
   }
 
   function pinImage() {
-    firestore
-      .collection('myPins')
-      .add({
-        objID: id,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      })
-      .catch((err) => console.error('error adding document', err));
-    setPinIcon('favorite');
+    if (imageHasPin === false) {
+      firestore
+        .collection('myPins')
+        .add({
+          artist: artist,
+          title: title,
+          objID: id,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        })
+        .then(() => {
+          setImageHasPin(true);
+          console.log('added');
+        })
+        .catch((err) => console.error('error adding document', err));
+    } else console.log('already in DB');
   }
 
   // TODOS:
@@ -95,18 +125,22 @@ export default function CardPage({ match }) {
       <div className='imgLargeFrame'>
         {loading && <Loading />}
         <img className='imgLarge' src={src} alt={title} />
-        <ControlBtns onClick={pinImage} innerContent={pinIcon}/>
+        <ControlBtns
+          innerContent={imageHasPin === true ? 'favorite' : 'favorite_border'}
+          onClick={pinImage}
+        />
       </div>
 
-      {loading === false && <h3 style={{ textAlign: 'center' }}>
-        {title} by {artist}
-      </h3>}
+      {/* this should be its own component */}
+      {loading === false && <Title title={title} name={artist}/>}
 
       <p>{query.length}</p>
 
-      <div className='imgContainer'>{viewMore && displayMore()}</div>
+      <div className='imgContainer'>{viewMore && displaySimilarImgs()}</div>
 
-      <button className='loadBtn' onClick={handleClick}>similar images</button>
+      <button className='btn' onClick={handleClick}>
+        load similar images...
+      </button>
     </div>
   );
 }

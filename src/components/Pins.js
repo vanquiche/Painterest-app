@@ -18,6 +18,7 @@ export default function Pins() {
         });
       });
     setLoaded(true);
+    // eslint-disable-next-line
   }, []);
 
   return (

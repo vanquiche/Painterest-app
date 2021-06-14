@@ -36,6 +36,7 @@ const App = () => {
 
   useEffect(() => {
     setLoading(true);
+    let cancel;
     axios
       .get('https://collectionapi.metmuseum.org/public/collection/v1/search', {
         params: {
@@ -43,6 +44,7 @@ const App = () => {
           medium: 'Paintings',
           q: query || 'art',
         },
+        cancelToken: new axios.CancelToken(c => cancel = c)
       })
       .then((res) => {
         // console.log(res);
@@ -53,6 +55,9 @@ const App = () => {
         setLoading(false);
       })
       .catch((error) => console.error(error));
+
+      return () => cancel();
+
   }, [query]);
 
   function loadMore() {

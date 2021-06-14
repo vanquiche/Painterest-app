@@ -8,15 +8,19 @@ export default function CardContainer(props) {
   const results = props.results;
   return (
     <>
+      {props.loading && <Loading />}
       <Search queries={results.length} />
       <main className='imgContainer'>
-        {results.slice(0, props.count).filter(objId => objId != 16580).map((objID) => {
-          return <Card id={objID} className='imgCard'/>;
-        })}
+        {/* eslint-disable-next-line */}
+        {results
+          .slice(0, props.count)
+          .filter((objId) => objId != 16580)
+          .map((objID) => {
+            return <Card id={objID} className='imgCard' />;
+          })}
       </main>
       {props.noneToLoad && <Error />}
-      {props.loading && <Loading />}
-      <button onClick={props.onClick}>Load more</button>
+      <button className='btn' onClick={props.onClick}>load more...</button>
     </>
   );
 }
