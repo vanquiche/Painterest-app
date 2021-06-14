@@ -3,6 +3,7 @@ import ControlBtns from './ControlBtns';
 import Loading from './Loading';
 import Card from './Card';
 import Title from './Title';
+import ArrowBtn from './ArrowBtn';
 
 import axios from 'axios';
 
@@ -66,6 +67,7 @@ export default function CardPage({ match }) {
         });
       })
       .catch((err) => console.error(err));
+    // eslint-disable-next-line
   }, [id]);
 
   function handleClick() {
@@ -113,7 +115,20 @@ export default function CardPage({ match }) {
           console.log('added');
         })
         .catch((err) => console.error('error adding document', err));
-    } else console.log('already in DB');
+    }
+    else {
+      firestore
+        .collection('myPins')
+        .where('objID', '==', id)
+        .get()
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
+            doc.ref.delete();
+            setImageHasPin(false);
+            console.log('deleted');
+          });
+        });
+    }
   }
 
   // TODOS:
@@ -124,6 +139,7 @@ export default function CardPage({ match }) {
     <div>
       <div className='imgLargeFrame'>
         {loading && <Loading />}
+
         <img className='imgLarge' src={src} alt={title} />
         <ControlBtns
           innerContent={imageHasPin === true ? 'favorite' : 'favorite_border'}
@@ -131,16 +147,13 @@ export default function CardPage({ match }) {
         />
       </div>
 
-      {/* this should be its own component */}
-      {loading === false && <Title title={title} name={artist}/>}
+      {loading === false && <Title title={title} name={artist} />}
 
       <p>{query.length}</p>
 
       <div className='imgContainer'>{viewMore && displaySimilarImgs()}</div>
 
-      <button className='btn' onClick={handleClick}>
-        load similar images...
-      </button>
+      <ArrowBtn onClick={handleClick} />
     </div>
   );
 }

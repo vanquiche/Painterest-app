@@ -3,6 +3,9 @@ import Loading from './Loading';
 import Search from './Search';
 import Error from './Error';
 import Card from './Card';
+import ArrowBtn from './ArrowBtn'
+
+import 'material-design-icons/iconfont/material-icons.css';
 
 export default function CardContainer(props) {
   const results = props.results;
@@ -11,16 +14,17 @@ export default function CardContainer(props) {
       {props.loading && <Loading />}
       <Search queries={results.length} />
       <main className='imgContainer'>
-        {/* eslint-disable-next-line */}
         {results
           .slice(0, props.count)
-          .filter((objId) => objId != 16580)
+          .filter((objId) => objId !== 16580)
           .map((objID) => {
             return <Card id={objID} className='imgCard' />;
           })}
       </main>
       {props.noneToLoad && <Error />}
-      <button className='btn' onClick={props.onClick}>load more...</button>
+
+      <ArrowBtn onClick={props.onClick}/>
+
     </>
   );
 }
