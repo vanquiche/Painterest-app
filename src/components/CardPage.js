@@ -4,6 +4,7 @@ import Loading from './Loading';
 import Card from './Card';
 import Title from './Title';
 import ArrowBtn from './ArrowBtn';
+import Zoom from 'react-img-zoom';
 
 import axios from 'axios';
 
@@ -105,8 +106,7 @@ export default function CardPage({ match }) {
     if (!auth.currentUser) {
       alert('please Sign-in');
       return;
-    }
-    else if (imageHasPin === false) {
+    } else if (imageHasPin === false) {
       firestore
         .collection('myPins')
         .add({
@@ -120,8 +120,7 @@ export default function CardPage({ match }) {
           console.log('added');
         })
         .catch((err) => console.error('error adding document', err));
-    }
-    else {
+    } else {
       firestore
         .collection('myPins')
         .where('objID', '==', id)
@@ -145,7 +144,14 @@ export default function CardPage({ match }) {
       <div className='imgLargeFrame'>
         {loading && <Loading />}
 
-        <img className='imgLarge' src={src} alt={title} />
+        {/* <img className='imgLarge' src={src} alt={title} /> */}
+        <Zoom
+          img={src}
+          zoomScale={3}
+          width={800}
+          height={800}
+          transitionTime={0.5}
+        />
         <ControlBtns
           innerContent={imageHasPin === true ? 'favorite' : 'favorite_border'}
           onClick={pinImage}
