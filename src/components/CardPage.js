@@ -4,7 +4,9 @@ import Loading from './Loading';
 import Card from './Card';
 import Title from './Title';
 import ArrowBtn from './ArrowBtn';
-import Zoom from 'react-img-zoom';
+
+import InnerImageZoom from 'react-inner-image-zoom';
+import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css';
 
 import axios from 'axios';
 
@@ -18,7 +20,8 @@ export default function CardPage({ match }) {
 
   const [query, setQuery] = useState([]);
   const [count, setCount] = useState(15);
-  const [src, setSrc] = useState('');
+  const [srcSmall, setSrcSmall] = useState('');
+  const [srcLarge, setSrcLarge] = useState('');
   const [title, setTitle] = useState('');
   const [artist, setArtist] = useState('');
   const [loading, setLoading] = useState(true);
@@ -34,7 +37,8 @@ export default function CardPage({ match }) {
         { cancelToken: new axios.CancelToken((c) => (cancel = c)) }
       )
       .then((res) => {
-        setSrc(res.data.primaryImage);
+        setSrcSmall(res.data.primaryImageSmall);
+        setSrcLarge(res.data.primaryImage);
         setTitle(res.data.title);
         setArtist(res.data.artistDisplayName);
       })
@@ -144,23 +148,17 @@ export default function CardPage({ match }) {
       <div className='imgLargeFrame'>
         {loading && <Loading />}
 
-        {/* <img className='imgLarge' src={src} alt={title} /> */}
-        <Zoom
-          img={src}
-          zoomScale={3}
-          width={800}
-          height={800}
-          transitionTime={0.5}
-        />
-        <ControlBtns
-          innerContent={imageHasPin === true ? 'favorite' : 'favorite_border'}
-          onClick={pinImage}
-        />
+        <InnerImageZoom src={srcSmall} zoomSrc={srcLarge} width={900}/>
       </div>
+
+      <ControlBtns
+        innerContent={imageHasPin === true ? 'favorite' : 'favorite_border'}
+        onClick={pinImage}
+      />
 
       {loading === false && <Title title={title} name={artist} />}
 
-      <p>{query.length}</p>
+      {/* <p>{query.length}</p> */}
 
       <div className='imgContainer'>{viewMore && displaySimilarImgs()}</div>
 

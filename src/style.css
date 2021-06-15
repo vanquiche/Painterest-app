@@ -31,6 +31,10 @@ input {
   z-index: 100;
 }
 
+.pinIcon {
+  color: lightcoral;
+}
+
 .search {
   border: none;
   border-radius: 25px;
@@ -97,13 +101,16 @@ input {
 
 .controlBtnsWrapper {
   display: flex;
-  position: absolute;
+  /* position: absolute; */
   flex-shrink: 2;
-  transform: translate(-50%, -50%);
-  bottom: 0;
-  left: 50%;
+  justify-content: center;
+  margin: auto;
+  /* bottom: 0; */
+  /* left: 50%; */
+  /* background-color: blue; */
   z-index: 2;
-  color: white;
+  /* color: white; */
+  color: lightcoral;
 }
 
 .controlBtnsWrapper li {
@@ -134,6 +141,7 @@ input {
 
 .titleWrapper {
   text-align: center;
+  margin: 15px;
 }
 
 .title {
@@ -152,5 +160,5 @@ input {
 }
 
 .font36 {
-  font-size: 36px;
+  font-size: 28px;
 }

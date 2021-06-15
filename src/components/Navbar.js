@@ -57,7 +57,7 @@ export default function Navbar(props) {
         />
       </form>
       <Link to='/pins'>
-        <span className='material-icons'>favorite</span>
+        <span className='material-icons pinIcon'>favorite</span>
       </Link>
       {user ? <SignOut /> : <SignIn />}
     </nav>
