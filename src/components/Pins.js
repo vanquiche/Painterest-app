@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-// import { useCollectionData } from 'react-firebase-hooks';
+import Card from './Card';
 import firebase from 'firebase/app';
 
 export default function Pins() {
-  const [pins, setPins] = useState([]);
-  const [loading, setLoaded] = useState(false);
   const firestore = firebase.firestore();
+  const auth = firebase.auth();
+  const [queries, setQueries] = useState([]);
+  const [loading, setLoaded] = useState(false);
 
   useEffect(() => {
     setLoaded(false);
@@ -14,17 +15,23 @@ export default function Pins() {
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          setPins(prev => [...new Set ([...prev, doc.data().objID])]);
+          setQueries((prev) => [...new Set([...prev, doc.data().objID])]);
         });
-      });
-    setLoaded(true);
+      })
+      .then(setLoaded(true))
+      .catch((err) => console.error(err));
     // eslint-disable-next-line
   }, []);
 
   return (
     <div>
-      <h1>My Pins</h1>
-      <ul>{loading && pins.map((item) => <li key={item}>{item}</li>)}</ul>
+      <h1>{auth.currentUser === null ? 'please Sign in' : 'My Pins'}</h1>
+      <main className='imgContainer'>
+        {loading &&
+          queries.map((objID) => {
+            return <Card id={objID} className='imgCard' />;
+          })}
+      </main>
     </div>
   );
 }

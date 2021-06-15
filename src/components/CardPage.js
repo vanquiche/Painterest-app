@@ -12,6 +12,7 @@ import firebase from 'firebase/app';
 
 export default function CardPage({ match }) {
   const firestore = firebase.firestore();
+  const auth = firebase.auth();
   const id = match.params.id;
 
   const [query, setQuery] = useState([]);
@@ -101,7 +102,11 @@ export default function CardPage({ match }) {
   }
 
   function pinImage() {
-    if (imageHasPin === false) {
+    if (!auth.currentUser) {
+      alert('please Sign-in');
+      return;
+    }
+    else if (imageHasPin === false) {
       firestore
         .collection('myPins')
         .add({
