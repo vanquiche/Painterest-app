@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import User from './User';
 
-// css imports
-import 'material-design-icons/iconfont/material-icons.css';
 
 // firebase imports
 import { useAuthState } from 'react-firebase-hooks/auth';
 import firebase from 'firebase/app';
-
 
 export default function Navbar(props) {
   const auth = firebase.auth();
@@ -34,18 +32,13 @@ export default function Navbar(props) {
     return <button onClick={signInWithGoogle}>Sign In</button>;
   }
 
-  function SignOut() {
-    return auth.currentUser && <button onClick={() => auth.signOut()}>Sign Out</button>;
-  }
-
-  // console.log(auth.currentUser.displayName)
-
   return (
     <nav className='navbarContainer'>
       <Link to='/'>
-        <p className='logo'>
-          <span className='material-icons'>crop_portrait</span>Painterest
-        </p>
+        <div className='logoContainer'>
+          <span className='material-icons logoIcon'>crop_portrait</span>
+          Painterest
+        </div>
       </Link>
       <form onSubmit={handleSubmit}>
         <input
@@ -56,10 +49,15 @@ export default function Navbar(props) {
           placeholder='search...'
         />
       </form>
-      <Link to='/pins'>
-        <span className='material-icons pinIcon'>favorite</span>
-      </Link>
-      {user ? <SignOut /> : <SignIn />}
+
+      {user ? (
+        <User
+          user={auth.currentUser.displayName}
+          signOut={() => auth.signOut()}
+        />
+      ) : (
+        <SignIn />
+      )}
     </nav>
   );
 }

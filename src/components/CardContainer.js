@@ -5,7 +5,6 @@ import Error from './Error';
 import Card from './Card';
 import ArrowBtn from './ArrowBtn'
 
-import 'material-design-icons/iconfont/material-icons.css';
 
 export default function CardContainer(props) {
   const results = props.results;

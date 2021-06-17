@@ -5,7 +5,7 @@
 
 body {
   margin-top: 50px;
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
 }
 
 a {
@@ -28,6 +28,7 @@ input {
   left: 0;
   right: 0;
   top: 0;
+  /* padding-bottom: 10px; */
   z-index: 100;
 }
 
@@ -135,8 +136,12 @@ input {
 }
 
 @keyframes spin {
-  0% {transform: rotate(0deg)}
-  100% {transform: rotate(360deg)}
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .titleWrapper {
@@ -154,6 +159,7 @@ input {
   align-items: center;
   margin: auto;
   margin-top: 24px;
+  margin-bottom: 24px;
   cursor: pointer;
   height: 26px;
   width: 26px;
@@ -161,4 +167,50 @@ input {
 
 .font36 {
   font-size: 28px;
+}
+.userContainer {
+  position: relative;
+  cursor: default;
+}
+.dropDownContainer {
+  position: absolute;
+  list-style-type: none;
+  padding: 0 5px 5px 5px;
+  width: 100%;
+  text-align: center;
+  overflow-y: hidden;
+}
+
+.dropDownItem {
+  transform: translateY(-230%);
+  cursor: pointer;
+  background-color: cadetblue;
+  padding: 5px;
+  margin: 5px 5px 5px 0;
+  width: 100%;
+  border-radius: 20px;
+  color: white;
+  transition: 0.3s linear;
+}
+
+.slideDown {
+  transform: translateY(10%);
+}
+
+.dropDownArrow {
+  display: flex;
+  float: right;
+  align-items: flex-end;
+  padding-top: 2px;
+  cursor: pointer;
+  /* align-items: flex-start; */
+  /* background-color: brown; */
+}
+
+.logoIcon {
+  display: flex;
+  justify-content: flex-end;
+  float: left;
+  padding: 0;
+  /* background-color: brown; */
 }

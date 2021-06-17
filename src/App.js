@@ -10,6 +10,7 @@ import Pins from './components/Pins'
 import axios from 'axios';
 // import styling
 import './style.css';
+import 'material-design-icons/iconfont/material-icons.css';
 
 // import firebase
 import firebase from 'firebase/app';

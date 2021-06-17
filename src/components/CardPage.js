@@ -140,15 +140,13 @@ export default function CardPage({ match }) {
   }
 
   // TODOS:
-  // zoom function
   // info function
 
   return (
     <div>
       <div className='imgLargeFrame'>
         {loading && <Loading />}
-
-        <InnerImageZoom src={srcSmall} zoomSrc={srcLarge} width={900}/>
+        <InnerImageZoom src={srcSmall} zoomSrc={srcLarge} width={900} />
       </div>
 
       <ControlBtns
