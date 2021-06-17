@@ -34,9 +34,11 @@ const App = () => {
   const [count, setCount] = useState(15);
   const [noneToLoad, setNoneToLoad] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [noResults, setNoResults] = useState(false);
 
   useEffect(() => {
     setLoading(true);
+    setNoResults(false);
     let cancel;
     axios
       .get('https://collectionapi.metmuseum.org/public/collection/v1/search', {
@@ -55,7 +57,10 @@ const App = () => {
         setNoneToLoad(false);
         setLoading(false);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error('Error: ' + error);
+        setNoResults(true);
+      });
 
       return () => cancel();
 
@@ -75,6 +80,7 @@ const App = () => {
 
       <Switch>
         <Route exact path='/'>
+          {noResults && <p>no results</p>}
           <CardContainer
             results={results}
             count={count}
