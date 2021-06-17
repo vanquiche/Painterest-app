@@ -25,8 +25,7 @@ export default function Card(props) {
       })
       .catch((error) => console.log(error));
 
-      return () => cancel();
-      
+    return () => cancel();
   }, [props.id]);
 
   return (
@@ -38,9 +37,13 @@ export default function Card(props) {
           id={props.id}
           key={uuidv4()}
           alt={title}
-          src={src}
+          src={
+            src ||
+            'https://via.placeholder.com/150x400/FFFFFF/F5F5F5?text=...'
+          }
         />
       </Link>
     </div>
   );
 }
+

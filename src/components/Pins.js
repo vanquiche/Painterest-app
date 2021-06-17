@@ -25,7 +25,7 @@ export default function Pins() {
 
   return (
     <div>
-      <h1>{auth.currentUser === null ? 'please Sign in' : 'My Pins'}</h1>
+      <h3 className='collectionTitle'>{auth.currentUser === null ? 'please Sign in' : 'Collection'}</h3>
       <main className='imgContainer'>
         {loading &&
           queries.map((objID) => {

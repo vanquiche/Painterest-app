@@ -29,7 +29,7 @@ export default function Navbar(props) {
       const provider = new firebase.auth.GoogleAuthProvider();
       auth.signInWithPopup(provider);
     };
-    return <button onClick={signInWithGoogle}>Sign In</button>;
+    return <button className='signInBtn' onClick={signInWithGoogle}>Sign In</button>;
   }
 
   return (
@@ -37,15 +37,15 @@ export default function Navbar(props) {
       <Link to='/'>
         <div className='logoContainer'>
           <span className='material-icons logoIcon'>crop_portrait</span>
-          Painterest
+          <span className='logoText'>Painterest</span>
         </div>
       </Link>
-      <form onSubmit={handleSubmit}>
+      <form className='searchForm' onSubmit={handleSubmit}>
         <input
           type='text'
           onChange={handleChange}
           value={search}
-          className='search'
+          className='searchBar'
           placeholder='search...'
         />
       </form>
