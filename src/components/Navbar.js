@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import User from './User';
 
-
 // firebase imports
 import { useAuthState } from 'react-firebase-hooks/auth';
 import firebase from 'firebase/app';

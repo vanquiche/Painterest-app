@@ -10,6 +10,10 @@ body {
   /* margin-bottom: 50px; */
 }
 
+img {
+  color: rgba(0, 0, 0, 0);
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -195,6 +199,7 @@ input {
   cursor: default;
 }
 .dropDownContainer {
+  /* background-color: hotpink; */
   position: absolute;
   list-style-type: none;
   padding: 0 5px 5px 5px;
@@ -213,6 +218,10 @@ input {
   border-radius: 20px;
   color: whitesmoke;
   transition: 0.3s linear;
+}
+
+.dropDownItem:hover {
+  filter: brightness(130%);
 }
 
 .slideDown {
@@ -234,12 +243,12 @@ input {
   justify-content: flex-end;
   float: left;
   padding: 0;
-  color: #EE6055
+  color: #ee6055;
   /* background-color: brown; */
 }
 
 .logoText {
-  color: #EE6055;
+  color: #ee6055;
 }
 
 .signInBtn {
@@ -258,4 +267,39 @@ input {
   text-align: center;
   margin-top: 60px;
   margin: 5px;
+}
+
+@media (min-width: 320px) and (max-width: 500px) {
+  .logoText {
+    display: none;
+  }
+  .userName {
+    display: none;
+  }
+  .searchForm {
+    width: 80%;
+  }
+  .dropDownContainer {
+    width: 125px;
+    right: 0;
+    top: 25px;
+  }
+  .imgCard {
+    width: 190px;
+  }
+}
+
+@media (min-width: 700px) {
+  .imgCard {
+    width: 200px;
+  }
+  .imgCardSmall {
+    width: 200px;
+  }
+}
+
+@media (min-width: 750px) {
+  .imgCard {
+    width: 300px;
+  }
 }

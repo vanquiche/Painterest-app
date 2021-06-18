@@ -5,13 +5,13 @@ import Error from './Error';
 import Card from './Card';
 import ArrowBtn from './ArrowBtn'
 
-
 export default function CardContainer(props) {
   const results = props.results;
+  const searchResult = props === null ? 0 : results.length;
   return (
     <>
       {props.loading && <Loading />}
-      <Search queries={results.length} />
+      <Search queries={searchResult} />
       <main className='imgContainer'>
         {results
           .slice(0, props.count)

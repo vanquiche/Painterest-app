@@ -18,12 +18,11 @@ export default function Card(props) {
         { cancelToken: new axios.CancelToken((c) => (cancel = c)) }
       )
       .then((res) => {
-        // console.log(res);
         setSrc(res.data.primaryImageSmall);
         setTitle(res.data.title);
         setLoading(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log('Error: ' + error));
 
     return () => cancel();
   }, [props.id]);
@@ -38,12 +37,10 @@ export default function Card(props) {
           key={uuidv4()}
           alt={title}
           src={
-            src ||
-            'https://via.placeholder.com/150x400/FFFFFF/F5F5F5?text=...'
+            src || 'https://via.placeholder.com/150x400/FFFFFF/F5F5F5?text=...'
           }
         />
       </Link>
     </div>
   );
 }
-

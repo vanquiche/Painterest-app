@@ -1,26 +1,25 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function User(props) {
+  const [dropDownIsOpen, setDropDownIsOpen] = useState(false);
   const user = props.user.split(' ') || 'friend';
   const collection = useRef();
   const signout = useRef();
 
   function toggleClass() {
-    function timeout() {
-      setTimeout(() => {
-        collection.current.classList.toggle('slideDown');
-      }, 280);
-      signout.current.classList.toggle('slideDown');
-    }
-    timeout();
-
+    setDropDownIsOpen((prev) => !prev);
+    const time = dropDownIsOpen === false ? 130 : 300;
+    setTimeout(() => {
+      collection.current.classList.toggle('slideDown');
+    }, time);
+    signout.current.classList.toggle('slideDown');
   }
 
   return (
     <div className='userContainer'>
       <div>
-        hello {user[0]}
+        <span className='userName'>hello {user[0]}</span>
         <span className='material-icons dropDownArrow' onClick={toggleClass}>
           keyboard_arrow_down
         </span>
