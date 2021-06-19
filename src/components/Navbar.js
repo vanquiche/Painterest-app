@@ -46,6 +46,7 @@ export default function Navbar(props) {
           value={search}
           className='searchBar'
           placeholder='search...'
+          maxLength='35'
         />
       </form>
 

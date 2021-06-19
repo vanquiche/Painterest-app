@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Error() {
+export default function Error(props) {
   return (
-    <div>
-      <h3>No more to load</h3>
+    <div className='errorContainer'>
+      <p className='errorMsg'>{props.msg}</p>
     </div>
   );
 }

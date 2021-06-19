@@ -39,7 +39,7 @@ input {
 }
 
 .pinIcon {
-  color: lightcoral;
+  color: hotpink;
 }
 
 .searchForm {
@@ -52,23 +52,35 @@ input {
   padding-left: 15px;
   height: 26px;
   width: 100%;
+  font-weight: 400;
 }
 
 .queryResults {
   display: flex;
+  justify-content: flex-start;
+  height: 24px;
+  width: 70%;
   margin: auto;
-  text-align: left;
-  width: 87%;
-  /* background-color: grey; */
+  /* padding-left: 100px; */
+  /* background-color: hotpink; */
+  z-index: 5;
 }
+
 .queryResults p {
   color: gray;
+  font-weight: 400;
+  font-size: .8rem;
 }
 
 .controlBtnsWrapper {
   display: flex;
-  justify-content: space-evenly;
-  list-style: none;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+}
+
+.controlBtnsWrapper span {
+  padding: 0 10px 0 10px;
 }
 
 .imgContainer {
@@ -76,7 +88,7 @@ input {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: 95%;
+  width: 100%;
   height: auto;
   /* background-color: aqua; */
   margin: auto;
@@ -124,20 +136,12 @@ input {
 
 .controlBtnsWrapper {
   display: flex;
-  /* position: absolute; */
-  flex-shrink: 2;
-  justify-content: center;
-  margin: auto;
-  /* bottom: 0; */
-  /* left: 50%; */
-  /* background-color: blue; */
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 2;
-  /* color: white; */
-  color: lightcoral;
-}
-
-.controlBtnsWrapper li {
-  margin: 0 30px 0 30px;
+  color: white;
   cursor: pointer;
 }
 
@@ -180,15 +184,23 @@ input {
 }
 
 .arrowIconWrapper {
-  display: flex;
+  display: inline-flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: auto;
-  margin-top: 0;
-  margin-bottom: 0;
-  cursor: pointer;
-  height: 26px;
-  width: 26px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  /* margin-top: 0;
+  margin-bottom: 0; */
+  /* cursor: pointer; */
+  /* height: auto; */
+  /* background-color: hotpink; */
+  cursor: default;
+}
+
+.arrowMsg {
+  font-weight: 400;
+  color: gray;
 }
 
 .font36 {
@@ -233,6 +245,7 @@ input {
   float: right;
   align-items: flex-end;
   padding-top: 2px;
+  margin-left: 5px;
   cursor: pointer;
   /* align-items: flex-start; */
   /* background-color: brown; */
@@ -243,12 +256,13 @@ input {
   justify-content: flex-end;
   float: left;
   padding: 0;
-  color: #ee6055;
+  color: #E54B4B;
   /* background-color: brown; */
 }
 
 .logoText {
-  color: #ee6055;
+  color: #E54B4B;
+  margin-left: -4px;
 }
 
 .signInBtn {
@@ -269,6 +283,16 @@ input {
   margin: 5px;
 }
 
+.errorContainer {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
 @media (min-width: 320px) and (max-width: 500px) {
   .logoText {
     display: none;
@@ -285,8 +309,11 @@ input {
     top: 25px;
   }
   .imgCard {
-    width: 190px;
+    width: 150px;
   }
+  /* .queryResults {
+    width: 83%;
+  } */
 }
 
 @media (min-width: 700px) {
@@ -296,6 +323,9 @@ input {
   .imgCardSmall {
     width: 200px;
   }
+  /* .queryResults {
+    width: 75%;
+  } */
 }
 
 @media (min-width: 750px) {

@@ -21,7 +21,7 @@ export default function User(props) {
       <div>
         <span className='userName'>hello {user[0]}</span>
         <span className='material-icons dropDownArrow' onClick={toggleClass}>
-          keyboard_arrow_down
+          menu
         </span>
       </div>
 

@@ -3,17 +3,21 @@ import 'material-design-icons/iconfont/material-icons.css';
 
 export default function ControlBtns(props) {
   return (
-    <ul className='controlBtnsWrapper'>
-     
-      {/* pin icon */}
-      <li onClick={props.onClick}>
-        <span className='material-icons font36'>{props.innerContent}</span>
-      </li>
+    <div className='controlBtnsWrapper'>
+      <span onClick={props.favorite} className='material-icons font36'>
+        {props.innerContent}
+      </span>
 
-      {/* info icon */}
-      <li>
-        <span className='material-icons font36'>info</span>
-      </li>
-    </ul>
+      <a
+        href={props.url}
+        alt='MET-resource'
+        target='_blank'
+        rel='noopener noreferrer'
+      >
+        <span onClick={props.info} className='material-icons font36'>
+          info
+        </span>
+      </a>
+    </div>
   );
 }

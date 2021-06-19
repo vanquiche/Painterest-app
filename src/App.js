@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // import components
 import Navbar from './components/Navbar';
 import CardContainer from './components/CardContainer';
+import Error from './components/Error';
 import CardPage from './components/CardPage';
 import Pins from './components/Pins'
 // import packages
@@ -80,7 +81,7 @@ const App = () => {
 
       <Switch>
         <Route exact path='/'>
-          {noResults && <p>no results</p>}
+          {noResults && <Error msg='no search result found'/>}
           <CardContainer
             results={results}
             count={count}

@@ -24,6 +24,7 @@ export default function CardPage({ match }) {
   const [srcLarge, setSrcLarge] = useState('');
   const [title, setTitle] = useState('');
   const [artist, setArtist] = useState('');
+  const [objURL, setObjURL] = useState('');
   const [loading, setLoading] = useState(true);
   const [viewMore, setViewMore] = useState(false);
   const [imageHasPin, setImageHasPin] = useState(false);
@@ -41,6 +42,7 @@ export default function CardPage({ match }) {
         setSrcLarge(res.data.primaryImage);
         setTitle(res.data.title);
         setArtist(res.data.artistDisplayName);
+        setObjURL(res.data.objectURL);
       })
       .then(() => {
         setTimeout(() => {
@@ -145,14 +147,14 @@ export default function CardPage({ match }) {
   return (
     <div>
       <div className='imgLargeFrame'>
+        <ControlBtns
+          innerContent={imageHasPin === true ? 'favorite' : 'favorite_border'}
+          favorite={pinImage}
+          url={objURL}
+        />
         {loading && <Loading />}
         <InnerImageZoom src={srcSmall} zoomSrc={srcLarge} width={900} />
       </div>
-
-      <ControlBtns
-        innerContent={imageHasPin === true ? 'favorite' : 'favorite_border'}
-        onClick={pinImage}
-      />
 
       {loading === false && <Title title={title} name={artist} />}
 
@@ -160,7 +162,11 @@ export default function CardPage({ match }) {
 
       <div className='imgContainer'>{viewMore && displaySimilarImgs()}</div>
 
-      <ArrowBtn onClick={handleClick} />
+      {/* <a href={objURL} target='_blank'>
+        link
+      </a> */}
+
+      <ArrowBtn msg='similar images' onClick={handleClick} />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Card from './Card';
+import Error from './Error';
 import firebase from 'firebase/app';
 
 export default function Pins() {
@@ -25,7 +26,10 @@ export default function Pins() {
 
   return (
     <div>
-      <h3 className='collectionTitle'>{auth.currentUser === null ? 'please Sign in' : 'Collection'}</h3>
+      
+      {auth.currentUser === null && <Error msg='sign in to see collection' />}
+      {auth.currentUser !== null && queries.length === 0 && <Error msg='no saved image in collection' />}
+
       <main className='imgContainer'>
         {loading &&
           queries.map((objID) => {

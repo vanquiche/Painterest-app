@@ -22,7 +22,7 @@ export default function CardContainer(props) {
       </main>
       {props.noneToLoad && <Error />}
 
-      <ArrowBtn onClick={props.onClick}/>
+      <ArrowBtn onClick={props.onClick} msg='load more' />
 
     </>
   );
